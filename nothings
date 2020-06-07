@@ -1,0 +1,47 @@
+const URL = 'https://ibeautyconnectserver.herokuapp.com';
+const [viewToRender, setViewToRender] = useState('');
+const [usersData, setUsersData] = useState([]);
+const [supportData, setSupportData] = useState([]);
+
+
+
+useEffect(() => {
+
+
+  const getSupport = async () => {
+    const response = await fetch(`${URL}/apiAdmin/getSupport`);
+    const resData = await response.json();
+    setSupportData(resData.response);
+  };
+  getSupport();
+  getUsers();
+}, []);
+
+
+
+
+
+return (
+  <>
+    <SafeAreaView>
+      <Text style={{fontSize: 20, marginTop: 20}}>
+        Number of users {usersData.length}
+      </Text>
+      <Text style={{fontSize: 20, marginTop: 20}}>
+        Number of support {supportData.length}
+      </Text>
+      <TouchableOpacity
+        style={{backgroundColor: 'blue', marginTop: 10, padding: 20}}
+        onPress={() => handleActivate()}>
+        <Text style={{color: '#fff', fontSize: 30}}>Activate</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{backgroundColor: 'blue', marginTop: 10, padding: 20}}>
+        <Text style={{color: '#fff', fontSize: 30}}>Support</Text>
+      </TouchableOpacity>
+
+      {view}
+
+
+    </SafeAreaView>
